@@ -44,7 +44,6 @@ func (h *handler) Write(p []byte) (n int, e error) {
 		} else {
 
 		}
-		m.lock = h.b.msgLock
 		m.printMessage()
 	}
 	return len(p), nil

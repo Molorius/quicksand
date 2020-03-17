@@ -13,7 +13,6 @@ type Bedrock struct {
 	handler   handler
 	clients   map[string]int
 
-	msgLock    *sync.Mutex
 	clientLock *sync.Mutex
 }
 
@@ -22,10 +21,9 @@ func (b *Bedrock) Start() error {
 	b.started = true
 	b.handler.b = b // save pointer
 	b.clients = make(map[string]int)
-	b.msgLock = &sync.Mutex{}
 	b.clientLock = &sync.Mutex{}
 
-	msg := message{lock: b.msgLock, msg: "Starting Quicksand", priority: "INFO"}
+	msg := message{msg: "Starting Quicksand", priority: "INFO"}
 	msg.printMessage()
 
 	cmd := exec.Command("./bedrock_server")

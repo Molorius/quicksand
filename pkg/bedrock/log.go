@@ -2,7 +2,6 @@ package bedrock
 
 import (
 	"fmt"
-	"sync"
 	"time"
 )
 
@@ -11,7 +10,6 @@ type message struct {
 	time     string
 	priority string
 	msg      string
-	lock     *sync.Mutex
 }
 
 func (m *message) printMessage() error {
@@ -25,10 +23,6 @@ func (m *message) printMessage() error {
 	if m.priority == "" {
 		m.priority = "UNK"
 	}
-	//fmt.Printf("[%s %s %s] %s", msg.date, msg.time, msg.priority, msg.msg)
-	print := fmt.Sprintf("[%s %s %s] %s", m.date, m.time, m.priority, m.msg)
-	m.lock.Lock()
-	fmt.Println(print)
-	m.lock.Unlock()
+	fmt.Printf("[%s %s %s] %s\r\n", m.date, m.time, m.priority, m.msg)
 	return nil
 }
